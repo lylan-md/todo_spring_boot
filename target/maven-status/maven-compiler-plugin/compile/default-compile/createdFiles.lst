@@ -1,8 +1,10 @@
 com\testSpring\entities\Task.class
 com\testSpring\controllers\Tasks.class
+com\testSpring\repositories\UserRepository.class
 com\testSpring\Application.class
-com\testSpring\Response.class
+com\testSpring\repositories\TasksRepository.class
 com\testSpring\controllers\Login.class
+com\testSpring\entities\User.class
 com\testSpring\controllers\MyDay.class
 com\testSpring\controllers\Important.class
 com\testSpring\controllers\Planned.class

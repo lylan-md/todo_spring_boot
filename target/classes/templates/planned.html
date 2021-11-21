@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do</title>
+    <th:block th:include="head.html"></th:block>
+</head>
+<body>
+<th:block th:include="left_panel.html"></th:block>
+<div class="pure-u-1 pure-u-sm-16-24 pure-u-md-18-24 pure-u-xl-20-24" id="content-wrapper">
+    <th:block th:include="header.html"></th:block>
+    <div class="pure-u-1-1" id="content-block">
+        <div class="content-block-header">
+            <h1><span class="material-icons">calendar_today</span>Planned</h1>
+        </div>
+        <hr>
+        <input type="text" id="content-block-add" class="pure-u-19-24" onchange="handleInputTask()" placeholder="Add task">
+        <input type="date" id="content-block-date" class="pure-u-5-24" onchange="handleInputTask()">
+        <div class="content-block-list" id="task-list-block">
+            <th:block th:each="task: ${tasks}">
+                <div class="content-block-list-item pure-u-1-1" style="vertical-align: middle;">
+                    <div class="pure-u-2-24 pure-u-md-1-24">
+                        <input type="checkbox" th:checked="${task.isDone}" class="checkbox-is-done" th:onclick="redirect('/planned/switchIsDoneTaskFlag?task_id=[[${task.id}]]')">
+                    </div>
+                    <div class="pure-u-18-24 pure-u-md-21-24">
+                        <span th:style="${task.isDone} ? 'text-decoration: line-through' : 'text-decoration: none'" th:text="${task.description}"></span>
+                    </div>
+                    <div class="pure-u-3-24 pure-u-md-2-24" style="float: right;">
+                        <span class="material-icons" th:classappend="${task.important} ? favorite-icon-checked : favorite-icon-unchecked" th:onclick="redirect('/planned/switchImportantFlag?task_id=[[${task.id}]]')" th:text="${task.important} ? 'star' : 'star_border'"></span>
+                        <span class="material-icons delete-task-icon" th:onclick="redirect('/planned/deleteTask?task_id=[[${task.id}]]')">delete_outline</span>
+                    </div>
+                    <div class="content-block-list-item-planned-date" th:style="${task.plannedOn} ? 'display: block' : 'display: none'">
+                        <span style="font-size: 80%; color: #8c8c8c;">Planned on: </span>
+                        <span style="font-size: 80%; color: #788cde;" th:text="${task.plannedOn}"></span>
+                    </div>
+                </div>
+        </th:block>
+    </div>
+</div>
+</div>
+</body>
+<script>
+        function handleInputTask()
+        {
+            var textInput = document.getElementById("content-block-add");
+            var dateInput = document.getElementById("content-block-date");
+            var taskDescription = textInput.value;
+            var datePlanned = dateInput.value;
+
+            if (taskDescription.length && datePlanned.length)
+            {
+                var request = new XMLHttpRequest();
+                request.open('POST', '/planned/add', false);
+                request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+                var requestData = "task_description=" + taskDescription + "&planned_on=" + datePlanned;
+                request.send(requestData);
+
+                redirect("/planned/show");
+            }
+        }
+
+        function redirect(url)
+        {
+            window.location.href = url;
+        }
+
+        document.getElementById("menu-list-planned").classList.add("selected");
+    </script>
+</html>

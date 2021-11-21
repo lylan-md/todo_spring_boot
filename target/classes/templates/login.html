@@ -15,7 +15,7 @@
         <hr>
         <div class="login-form">
 <!--            <?php if($this->session->login_error) : ?>-->
-            <span class="login-error-box pure-u-4-5 pure-u-md-2-5 pure-u-xl-1-5"><?php echo $this->session->login_error; $this->session->unset_userdata('login_error'); ?></span>
+            <span class="login-error-box pure-u-4-5 pure-u-md-2-5 pure-u-xl-1-5" th:if="${login_error != null}" th:text="${login_error}"></span>
 <!--            <?php endif; ?>-->
             <form action="/login/auth" method="POST" onsubmit="return validateLogInForm(this)">
             <input class="pure-u-4-5 pure-u-md-2-5 pure-u-xl-1-5" name="email" type="email" id="email-login" placeholder="Your email..">
