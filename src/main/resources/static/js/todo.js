@@ -42,12 +42,12 @@ function closePanel()
 
 function validateLogInForm()
 {
-    var email = document.getElementById("email-login").value;
+    var username = document.getElementById("username-login").value;
     var password = document.getElementById("password-login").value;
     
-    if (!email.length)
+    if (!username.length)
     {
-        alert("Email is empty!");
+        alert("Username is empty!");
         return false;
     }
 
