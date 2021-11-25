@@ -10,4 +10,5 @@ com\testSpring\controllers\Tasks.class
 com\testSpring\repositories\UserRepository.class
 com\testSpring\Application.class
 com\testSpring\controllers\MyDay.class
+com\testSpring\controllers\Registration.class
 com\testSpring\controllers\Planned.class
